@@ -1,0 +1,1 @@
+import foolog from './js/pixabay-api'
