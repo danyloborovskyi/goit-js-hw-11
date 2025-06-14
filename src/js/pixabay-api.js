@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+
 const API_KEY = "50839747-8e280c8a680bf22042cf2c364"
 
 const form = document.querySelector(".form")
@@ -17,10 +20,11 @@ function getImagesByQuery() {
     .then(res => {
         if (res.data.hits.length > 0) {
             console.log(res)
-        // } else {
-        //     iziToast.error({
-        //         message: 'Sorry, there are no images matching your search query. Please try again!',
-        //     });
+            console.log("Params:", params);
+        } else {
+            iziToast.error({
+                message: 'Sorry, there are no images matching your search query. Please try again!',
+            });
         }
         })
     .catch(err => console.log(err)
