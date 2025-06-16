@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-
-import "izitoast/dist/css/iziToast.min.css";
-
 const API_KEY = "50839747-8e280c8a680bf22042cf2c364"
 
 export function getImagesByQuery(query) {

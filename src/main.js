@@ -1,4 +1,5 @@
 import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 import { getImagesByQuery } from "./js/pixabay-api"
 import { createGallery, clearGallery, refreshLightbox, showLoader, hideLoader } from "./js/render-functions";
@@ -13,14 +14,21 @@ function handleSubmit(event) {
     event.preventDefault()
     const query = input.value.trim();
 
-    if (!query) {
+    console.log(`[query]: "${query}"`);
+
+    if (query === "") {
+        iziToast.warning({
+        title: "Warning",
+        message: 'Please enter your query',
+        position: 'topCenter',
+        });
         return;
     }
 
     clearGallery(list);
 
     showLoader()
-    
+
     getImagesByQuery(query).then(data => {
         if (data.hits.length > 0) {
             console.log(data);
@@ -32,10 +40,14 @@ function handleSubmit(event) {
             });
         }
     })
-    .catch(error => console.log(error))
+    .catch(() => {
+        iziToast.error({
+                message: 'Oops, something went south',
+            });
+    })
     .finally(() => {
         hideLoader();
-        input.value = "";
+        // input.value = "";
     })
 }
 
